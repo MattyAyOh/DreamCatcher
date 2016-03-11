@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
+#import <MediaPlayer/MediaPlayer.h>
 
-@interface HomeViewController : UIViewController
+@interface HomeViewController : UIViewController <MPMediaPickerControllerDelegate>
 
 @property IBOutlet UIButton *chooseAudioButton;
 @property IBOutlet UIImageView *muteButtonImageView;

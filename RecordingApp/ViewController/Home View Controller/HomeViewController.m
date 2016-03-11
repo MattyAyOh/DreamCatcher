@@ -21,6 +21,61 @@
 
 @implementation HomeViewController
 
+- (IBAction) showMediaFilesPressed : (id) sender
+{
+   MPMediaPickerController *picker = [[MPMediaPickerController alloc] initWithMediaTypes: MPMediaTypeAnyAudio];
+   
+   picker.delegate                    = self;
+   picker.allowsPickingMultipleItems  = NO;
+   picker.prompt                      = NSLocalizedString(@"AddSongsPrompt", @"Prompt to user to choose some songs to play");
+   
+   
+   
+   [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleDefault animated:YES];
+   
+   [self presentViewController:picker animated:YES completion:nil];
+}
+
+- (void)mediaPicker:(MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection
+{
+   for( MPMediaItem *item in mediaItemCollection.items )
+   {
+      NSURL *assetURL = [item valueForProperty:MPMediaItemPropertyAssetURL];
+      if( !assetURL )
+      {
+         [self dismissViewControllerAnimated:YES completion:nil];
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Audio file not available"
+                                                         message:@"Audio is protected by DRM, and unfortunately we cannot play it"
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+         [alert show];
+         return;
+      }
+      AVURLAsset *assetAV = [AVURLAsset URLAssetWithURL:assetURL options:nil];
+      NSString *fileName = [assetURL lastPathComponent];
+      NSURL *outputURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], fileName]];
+      [[NSFileManager defaultManager] createFileAtPath:[outputURL path] contents:nil attributes:nil];
+
+      AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:assetAV presetName:AVAssetExportPresetLowQuality];
+      exportSession.outputURL = outputURL;
+      exportSession.outputFileType = AVFileTypeQuickTimeMovie;
+      [exportSession exportAsynchronouslyWithCompletionHandler:^(void) {
+         if (exportSession.status == AVAssetExportSessionStatusCompleted) {
+            NSLog(@"success");
+         } else {
+            NSLog(@"error: %@", [exportSession error]);
+            //error: Error Domain=AVFoundationErrorDomain Code=-11800 "The operation could not be completed" UserInfo=0x2023b720 {NSLocalizedDescription=The operation could not be completed, NSUnderlyingError=0x2023bb70 "The operation couldn’t be completed. (OSStatus error -12780.)", NSLocalizedFailureReason=An unknown error occurred (-12780)}
+         }
+      }];
+   }
+   [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker{
+   [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)viewDidLoad
 {
    [super viewDidLoad];
