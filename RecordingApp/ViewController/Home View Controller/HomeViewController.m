@@ -11,23 +11,23 @@
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate>
 {
-   AVAudioPlayer *_audioPlayer;
    NSArray *rows;
 }
+@property AVAudioPlayer *audioPlayer;
+@property BOOL muteInPressedState;
 @end
 
 @implementation HomeViewController
-@synthesize tableview,toneButton;
+@synthesize tableview;
 
 - (void)viewDidLoad
 {
    [super viewDidLoad];
    
-   toneButton.layer.cornerRadius= 4;
+   self.toneButton.layer.cornerRadius= 4;
    
    tableview.layer.cornerRadius=8;
    
-   ismute = NO;
    tableview.hidden = YES;
    
    /* NAVIGATIOM TITLE NAD NAVIGATION IMAGE */
@@ -52,54 +52,44 @@
    NSURL *soundUrl = [NSURL fileURLWithPath:path];
    
    /*CREATE AUDIO PLAYER OBJECT AND INITIALIZE WITH URL TO SOUND   */
-   _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
+   self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
    
    rows = @[@"Buzzer", @"DreamSpace"];
    
    [tableview reloadData];
    
    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
+   [longPress setMinimumPressDuration:0.1];
    [self.muteButtonImageView addGestureRecognizer:longPress];
    [self.muteButtonImageView setUserInteractionEnabled:YES];
 }
 
-- (IBAction)toneButton:(id)sender
-{
-   [self.tableview setHidden:!self.tableview.hidden];
-}
+
 
 - (void)longPress:(UILongPressGestureRecognizer*)gesture
 {
+   if( !self.muteInPressedState )
+   {
+      self.muteInPressedState = YES;
+      [self.audioPlayer pause];
+      [self.muteButtonImageView setImage:[UIImage imageNamed:@"geometric-red"]];
+   }
+   
    if ( gesture.state == UIGestureRecognizerStateEnded )
    {
-      if (ismute == NO)
+      if( self.muteInPressedState )
       {
+         self.muteInPressedState = NO;
          [self.muteButtonImageView setImage:[UIImage imageNamed:@"geometric"]];
-         [_audioPlayer play];
-         NSLog(@"Long Press PLAY BTN ON");
-      }else
-      {
-         [self.muteButtonImageView setImage:[UIImage imageNamed:@"geometric-red"]];
-         [_audioPlayer stop];
-         NSLog(@"Long Press STOP BTN OFF");
+         [self.audioPlayer play];
       }
-      
    }
-   else if(ismute == NO)
-   {
-      
-      [self.muteButtonImageView setImage:[UIImage imageNamed:@"geometric-red"]];
-      [_audioPlayer pause];
-      NSLog(@"Long Press 2 PAUSE");
-      
-   }else if(ismute == YES)
-   {
-      
-      tableview.hidden = YES;
-      [self.muteButtonImageView setImage:[UIImage imageNamed:@"geometric-red"]];
-      [_audioPlayer stop];
-      NSLog(@" OFF");
-   }
+}
+
+
+- (IBAction)toneButtonPressed:(id)sender
+{
+   [self.tableview setHidden:!self.tableview.hidden];
 }
 
 #pragma mark - UITableViewDelegate && UITableViewDataSource

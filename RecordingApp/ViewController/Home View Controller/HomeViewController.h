@@ -10,16 +10,11 @@
 #import "AppDelegate.h"
 
 @interface HomeViewController : UIViewController
-{
-    BOOL ismute;
-}
 
 @property (strong, nonatomic) IBOutlet UITableView *tableview;
 
 @property (strong, nonatomic) IBOutlet UIButton *toneButton;
 
 @property IBOutlet UIImageView *muteButtonImageView;
-
-- (IBAction)toneButton:(id)sender;
 
 @end
