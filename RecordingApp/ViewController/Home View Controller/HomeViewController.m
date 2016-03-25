@@ -20,27 +20,13 @@
 @end
 
 @implementation HomeViewController
-@synthesize tableview;
-- (IBAction)startAudioValueChanged:(id)sender
-{
-   if( [self.startAudioSwitch isOn] )
-   {
-      [self.muteButtonImageView setHidden:NO];
-      [self.tableview setHidden:YES];
-      [self.audioPlayer play];
-   }
-   else
-   {
-      
-   }
-}
 
 - (void)viewDidLoad
 {
    [super viewDidLoad];
    
    self.chooseAudioButton.layer.cornerRadius= 4;
-   tableview.layer.cornerRadius=8;
+   self.tableview.layer.cornerRadius=8;
    
    
    /* NAVIGATIOM TITLE NAD NAVIGATION IMAGE */
@@ -61,15 +47,39 @@
    
    self.availableAudioArray = @[@"Buzzer", @"DreamSpace"];
    
-   [tableview reloadData];
+   [self.tableview reloadData];
    
    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
    [longPress setMinimumPressDuration:0.1];
    [self.muteButtonImageView addGestureRecognizer:longPress];
    [self.muteButtonImageView setUserInteractionEnabled:YES];
+   
+   [self hideControls];
 }
 
+- (IBAction)startAudioValueChanged:(id)sender
+{
+   if( [self.startAudioSwitch isOn] )
+   {
+      [self.startAudioLabel setHidden:YES];
+      [self.muteButtonImageView setHidden:NO];
+      [self.chooseAudioButton setHidden:NO];
+      [self.audioPlayer play];
+   }
+   else
+   {
+      [self hideControls];
+   }
+}
 
+- (void)hideControls
+{
+   [self.startAudioLabel setHidden:NO];
+   [self.muteButtonImageView setHidden:YES];
+   [self.chooseAudioButton setHidden:YES];
+   [self.tableview setHidden:YES];
+   [self.audioPlayer pause];
+}
 
 - (void)longPress:(UILongPressGestureRecognizer*)gesture
 {
