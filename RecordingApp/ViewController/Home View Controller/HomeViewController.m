@@ -31,8 +31,8 @@
    
    /* NAVIGATIOM TITLE NAD NAVIGATION IMAGE */
    self.title = @"Dreamcatcher";
-   UIImage *img = [UIImage imageNamed:@"Cloud"];
-   UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+   UIImage *img = [UIImage imageNamed:@"assembly"];
+   UIImageView *imgView = [UIImageView new];
    [imgView setImage:img];
    [imgView setContentMode:UIViewContentModeCenter];
    
