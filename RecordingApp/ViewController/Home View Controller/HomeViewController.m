@@ -44,7 +44,8 @@
    NSString *defaultAudioPath = [NSString stringWithFormat:@"%@/Buzzer.mp3", [[NSBundle mainBundle] resourcePath]];
    NSURL *defaultSoundURL = [NSURL fileURLWithPath:defaultAudioPath];
    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:defaultSoundURL error:nil];
-   
+   self.audioPlayer.numberOfLoops = -1;
+ 
    self.availableAudioArray = @[@"Buzzer", @"DreamSpace"];
    
    [self.tableview reloadData];
@@ -136,18 +137,15 @@
 /* DETAILS VIEW ENTRY */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
-   [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-   
-   NSString *path = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath],[self.availableAudioArray objectAtIndex:indexPath.row]];
+   NSString *path = [NSString stringWithFormat:@"%@/%@.mp3", [[NSBundle mainBundle] resourcePath],[self.availableAudioArray objectAtIndex:indexPath.row]];
    NSURL *soundUrl = [NSURL fileURLWithPath:path];
    
-   [_audioPlayer stop];
+   [self.audioPlayer stop];
    
-   /*CREATE AUDIO PLAYER OBJECT AND INITIALIZE WITH URL TO SOUND   */
-   _audioPlayer = [_audioPlayer initWithContentsOfURL:soundUrl error:nil];
+   self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
    
-   _audioPlayer.numberOfLoops=1;
-   [_audioPlayer play];
+   self.audioPlayer.numberOfLoops = -1;
+   [self.audioPlayer play];
 }
 
 
