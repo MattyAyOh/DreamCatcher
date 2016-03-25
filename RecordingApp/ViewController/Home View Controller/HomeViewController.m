@@ -10,51 +10,56 @@
 #import <AVFoundation/AVFoundation.h>
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate>
-{
-   NSArray *rows;
-}
+
+@property (strong, nonatomic) IBOutlet UISwitch *startAudioSwitch;
+@property (strong, nonatomic) IBOutlet UILabel *startAudioLabel;
 @property AVAudioPlayer *audioPlayer;
 @property BOOL muteInPressedState;
+@property NSArray *availableAudioArray;
+
 @end
 
 @implementation HomeViewController
 @synthesize tableview;
+- (IBAction)startAudioValueChanged:(id)sender
+{
+   if( [self.startAudioSwitch isOn] )
+   {
+      [self.muteButtonImageView setHidden:NO];
+      [self.tableview setHidden:YES];
+      [self.audioPlayer play];
+   }
+   else
+   {
+      
+   }
+}
 
 - (void)viewDidLoad
 {
    [super viewDidLoad];
    
-   self.toneButton.layer.cornerRadius= 4;
-   
+   self.chooseAudioButton.layer.cornerRadius= 4;
    tableview.layer.cornerRadius=8;
    
-   tableview.hidden = YES;
    
    /* NAVIGATIOM TITLE NAD NAVIGATION IMAGE */
    self.title = @"Dreamcatcher";
    UIImage *img = [UIImage imageNamed:@"Cloud"];
    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
    [imgView setImage:img];
-   //setContent mode aspect fit
    [imgView setContentMode:UIViewContentModeCenter];
    
    self.navigationItem.titleView = imgView;
-   
    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-   
    self.navigationController.navigationBar.translucent = NO;
    
    
-   /*  CONSTRUCT URL TO SEND FILE  */
+   NSString *defaultAudioPath = [NSString stringWithFormat:@"%@/Buzzer.mp3", [[NSBundle mainBundle] resourcePath]];
+   NSURL *defaultSoundURL = [NSURL fileURLWithPath:defaultAudioPath];
+   self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:defaultSoundURL error:nil];
    
-   
-   NSString *path = [NSString stringWithFormat:@"%@/Tone/Tone 2.mp3", [[NSBundle mainBundle] resourcePath]];
-   NSURL *soundUrl = [NSURL fileURLWithPath:path];
-   
-   /*CREATE AUDIO PLAYER OBJECT AND INITIALIZE WITH URL TO SOUND   */
-   self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
-   
-   rows = @[@"Buzzer", @"DreamSpace"];
+   self.availableAudioArray = @[@"Buzzer", @"DreamSpace"];
    
    [tableview reloadData];
    
@@ -86,8 +91,7 @@
    }
 }
 
-
-- (IBAction)toneButtonPressed:(id)sender
+- (IBAction)chooseAudioButtonPressed:(id)sender
 {
    [self.tableview setHidden:!self.tableview.hidden];
 }
@@ -101,7 +105,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-   return [rows count];
+   return [self.availableAudioArray count];
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -114,7 +118,7 @@
    {
       cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
    }
-   cell.textLabel.text = [rows objectAtIndex:indexPath.row];
+   cell.textLabel.text = [self.availableAudioArray objectAtIndex:indexPath.row];
    
    return cell;
 }
@@ -124,7 +128,7 @@
 {
    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
    
-   NSString *path = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath],[rows objectAtIndex:indexPath.row]];
+   NSString *path = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath],[self.availableAudioArray objectAtIndex:indexPath.row]];
    NSURL *soundUrl = [NSURL fileURLWithPath:path];
    
    [_audioPlayer stop];

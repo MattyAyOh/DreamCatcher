@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A1BEB981CA4CBBB00091A7F /* Buzzer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BEB961CA4CBBB00091A7F /* Buzzer.mp3 */; };
+		3A1BEB991CA4CBBB00091A7F /* DreamSpace.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BEB971CA4CBBB00091A7F /* DreamSpace.mp3 */; };
 		3AD3796B1CA4C44700E8E7CE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AD3796A1CA4C44700E8E7CE /* Images.xcassets */; };
 		75109CB21C5A4144003EC485 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75109CB11C5A4144003EC485 /* Accounts.framework */; };
 		757E95DB1C464855006996F8 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 757E95DA1C464855006996F8 /* SearchViewController.m */; };
@@ -14,8 +16,6 @@
 		75B469981C411C2700B3FAE9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B469971C411C2700B3FAE9 /* CoreGraphics.framework */; };
 		75D7122F1C464A7A0072592F /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D7122E1C464A7A0072592F /* CalendarViewController.m */; };
 		75E6DC061C44C6E100D1BE04 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E6DC051C44C6E100D1BE04 /* MessageUI.framework */; };
-		75F6F6121C48F4AF00FCD502 /* Tone 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 75F6F6101C48F4AF00FCD502 /* Tone 1.mp3 */; };
-		75F6F6131C48F4AF00FCD502 /* Tone 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 75F6F6111C48F4AF00FCD502 /* Tone 2.mp3 */; };
 		FB238F8F1C32960D00C100C2 /* RecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB238F8E1C32960D00C100C2 /* RecordViewController.m */; };
 		FB238FA61C32966300C100C2 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = FB238F961C32966300C100C2 /* Contact.m */; };
 		FB238FA71C32966300C100C2 /* GoToWebsite.m in Sources */ = {isa = PBXBuildFile; fileRef = FB238F991C32966300C100C2 /* GoToWebsite.m */; };
@@ -68,6 +68,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A1BEB961CA4CBBB00091A7F /* Buzzer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Buzzer.mp3; path = RecordingApp/Tones/Buzzer.mp3; sourceTree = SOURCE_ROOT; };
+		3A1BEB971CA4CBBB00091A7F /* DreamSpace.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = DreamSpace.mp3; path = RecordingApp/Tones/DreamSpace.mp3; sourceTree = SOURCE_ROOT; };
 		3AD3796A1CA4C44700E8E7CE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		75109CB11C5A4144003EC485 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		757E95D91C464855006996F8 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
@@ -78,8 +80,6 @@
 		75D7122D1C464A7A0072592F /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
 		75D7122E1C464A7A0072592F /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
 		75E6DC051C44C6E100D1BE04 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		75F6F6101C48F4AF00FCD502 /* Tone 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Tone 1.mp3"; sourceTree = "<group>"; };
-		75F6F6111C48F4AF00FCD502 /* Tone 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Tone 2.mp3"; sourceTree = "<group>"; };
 		FB238F8D1C32960D00C100C2 /* RecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordViewController.h; sourceTree = "<group>"; };
 		FB238F8E1C32960D00C100C2 /* RecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordViewController.m; sourceTree = "<group>"; };
 		FB238F951C32966300C100C2 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
@@ -206,13 +206,13 @@
 			path = "Calendar View Controller";
 			sourceTree = "<group>";
 		};
-		75F6F60F1C48F4AF00FCD502 /* Tone */ = {
+		75F6F60F1C48F4AF00FCD502 /* Tones */ = {
 			isa = PBXGroup;
 			children = (
-				75F6F6101C48F4AF00FCD502 /* Tone 1.mp3 */,
-				75F6F6111C48F4AF00FCD502 /* Tone 2.mp3 */,
+				3A1BEB961CA4CBBB00091A7F /* Buzzer.mp3 */,
+				3A1BEB971CA4CBBB00091A7F /* DreamSpace.mp3 */,
 			);
-			name = Tone;
+			name = Tones;
 			path = RecordingApp/Tone;
 			sourceTree = "<group>";
 		};
@@ -397,11 +397,11 @@
 		FB60C40A1C27F12B00C0ACF1 = {
 			isa = PBXGroup;
 			children = (
-				75F6F60F1C48F4AF00FCD502 /* Tone */,
 				FB74B4BB1C3A8ABE0026D8CA /* Frameworks */,
 				FBF39DDC1C36563E00E0FA2A /* Database */,
 				FBF8000E1C328665009E3DAD /* Library */,
 				FB8211A91C28117900580F36 /* ViewController */,
+				75F6F60F1C48F4AF00FCD502 /* Tones */,
 				FB60C4151C27F12B00C0ACF1 /* RecordingApp */,
 				FB60C42F1C27F12C00C0ACF1 /* RecordingAppTests */,
 				FB60C4141C27F12B00C0ACF1 /* Products */,
@@ -623,13 +623,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A1BEB981CA4CBBB00091A7F /* Buzzer.mp3 in Resources */,
+				3A1BEB991CA4CBBB00091A7F /* DreamSpace.mp3 in Resources */,
 				FB60C4221C27F12C00C0ACF1 /* Main.storyboard in Resources */,
 				FBF39DE31C365EEB00E0FA2A /* Dreamcatcher.sqlite in Resources */,
 				3AD3796B1CA4C44700E8E7CE /* Images.xcassets in Resources */,
 				FB60C4271C27F12C00C0ACF1 /* LaunchScreen.xib in Resources */,
-				75F6F6131C48F4AF00FCD502 /* Tone 2.mp3 in Resources */,
 				FB2C8F9A1C33AEDE00D49863 /* MenuViewController.xib in Resources */,
-				75F6F6121C48F4AF00FCD502 /* Tone 1.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

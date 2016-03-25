@@ -11,10 +11,8 @@
 
 @interface HomeViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UITableView *tableview;
-
-@property (strong, nonatomic) IBOutlet UIButton *toneButton;
-
+@property IBOutlet UIButton *chooseAudioButton;
 @property IBOutlet UIImageView *muteButtonImageView;
+@property IBOutlet UITableView *tableview;
 
 @end
